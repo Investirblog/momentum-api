@@ -66,7 +66,7 @@ def fetch_etf(etf):
         params = {
             "function": "TIME_SERIES_DAILY_ADJUSTED",
             "symbol": etf["ticker"],
-            "outputsize": "full",
+            "outputsize": "compact",
             "apikey": AV_KEY,
         }
         with httpx.Client(timeout=30) as client:
@@ -82,7 +82,7 @@ def fetch_etf(etf):
         closes = [float(ts[d]["4. close"]) for d in dates]
 
         if len(closes) < 30:
-            raise ValueError(f"Seulement {len(closes)} jours")
+            raise ValueError(f"Seulement {len(closes)} jours disponibles")
 
         p1m = calc_perf(closes, 21)
         p3m = calc_perf(closes, 63)
