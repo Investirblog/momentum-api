@@ -81,7 +81,7 @@ def fetch_etf(etf):
         ts = data["Time Series (Daily)"]
         # Trier par date croissante
         dates = sorted(ts.keys())
-        closes = [float(ts[d]["5. adjusted close"]) for d in dates]
+        closes = [float(ts[d]["4. close"]) for d in dates]
 
         if len(closes) < 30:
             raise ValueError(f"Seulement {len(closes)} jours")
