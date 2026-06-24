@@ -74,12 +74,10 @@ def fetch_etf(etf):
             data = r.json()
 
         if "Time Series (Daily)" not in data:
-            # Afficher le message d'erreur Alpha Vantage
             note = data.get("Note") or data.get("Information") or str(data)
-            raise ValueError(note[:120])
+            raise ValueError(str(note)[:120])
 
         ts = data["Time Series (Daily)"]
-        # Trier par date croissante
         dates = sorted(ts.keys())
         closes = [float(ts[d]["4. close"]) for d in dates]
 
